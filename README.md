@@ -10,6 +10,8 @@ Quantization bits: 16bits、8bits、4bits
 
 ## Code Structure:
 
+
+
 ```
 unfairness-in-model-quantization
 ├── __init__.py
@@ -32,7 +34,8 @@ unfairness-in-model-quantization
 │       └── quantize.py
 │           
 ├── data
-│   └── age_gender.csv
+│   ├── cifar-10-batches-py
+│   └── MNIST
 └── models
     ├── __init__.py
     ├── nin.py
@@ -98,9 +101,9 @@ python main.py --w_bits 8 --a_bits 8
 python main.py --w_bits 4 --a_bits 4
 ```
 
-*QAT*
+QAT
 
-- Default: symmetric, (weighted) channel-level quantization, BN not fused, weight_observer-MinMaxObserver, no loading of pre-trained floating-point models, QAT
+- Default: symmetric, (weighted) channel-level quantization, BN not fused, weight_observer-MinMaxObserver, no loading of pre-trained floating-point models, w_bits 8 , a_bits 8, QAT
 
 ```bash
 python main.py --q_type 0 --q_level 0 --weight_observer 0
@@ -116,7 +119,15 @@ PTQ
 
 --refine，load the parameters of the pre-trained floating-point model and quantize on it
 
+- Default: symmetric, (weighted) channel-level quantization, BN not fused, weight_observer-MinMaxObserver, w_bits 8 , a_bits 8, ptq
+
 ```bash
 python main.py --refine ./models_save/nin_gc.pth --q_level 0 --bn_fuse --pretrained_model --ptq_control --ptq --batch_size 32
+```
+
+- Combined with WA
+
+```bash
+python main.py --refine ./models_save/nin_gc.pth --q_level 0 --bn_fuse --pretrained_model --ptq_control --ptq --batch_size 32 --w_bits 16 --a_bits 16
 ```
 
