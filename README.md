@@ -10,7 +10,13 @@ Quantization bits: 16bits、8bits、4bits
 
 ## Code Structure:
 
+The main code is in quantization/code/.
 
+The main-cifar10.py file performs quantization experimental tests on the CIFAR10 dataset. Since the CIFAR10 dataset is already available in PyTorch, it can be downloaded during runtime. 
+
+The main-mnist.py file conducts experiments on the MNIST dataset. The dataset can be downloaded during runtime as well.
+
+The main-utkface.py file also performs quantization experimental tests on the UTK-Face dataset, which requires downloading the UTK-Face dataset separately. The UTK-Face dataset is located in "/data/age_gender.gz" file. Before running the code, it needs to be extracted and converted into a CSV file.
 
 ```
 unfairness-in-model-quantization
@@ -24,8 +30,8 @@ unfairness-in-model-quantization
 │       │   ├── bn_fused_model_test.py
 │       │   └── models_save
 │       │       └── models_save.txt
-│       ├── main.py
 │       ├── main_class.py
+│       ├── main_dataset.py
 │       ├── main_dataset.py
 │       ├── CustomUTK.py
 │       ├── MultNN.py
